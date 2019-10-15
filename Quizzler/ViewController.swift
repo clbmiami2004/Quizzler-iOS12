@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     let allQuestions = QuestionBank() //Creating an object
     var pickedAnswer: Bool = false
     var questionNumber: Int = 0
+    var score: Int = 0
     
     
     @IBOutlet weak var questionLabel: UILabel!
@@ -24,8 +25,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
  //MARK: - Initializing the first question and showing it on the screen.
-        let firstQuestion = allQuestions.list[0]
-        questionLabel.text = firstQuestion.questionText
+        nextQuestion()
         
     }
 
@@ -46,6 +46,8 @@ class ViewController: UIViewController {
     
     
     func updateUI() {
+        
+        scoreLabel.text = "Score: \(score)"
       
     }
     
@@ -53,6 +55,7 @@ class ViewController: UIViewController {
     func nextQuestion() {
         if questionNumber <= 12 {
         questionLabel.text = allQuestions.list[questionNumber].questionText
+            updateUI()
         }else {
             let alert = UIAlertController(title: "Awesome!", message: "You've finished all the questions, would you like to start over?", preferredStyle: .alert)
             
@@ -76,13 +79,14 @@ class ViewController: UIViewController {
 //Now we compare it to the pickedAnswer:
         if correctAnswer == pickedAnswer {
             print("You got it!")
+            score += 1
         }else {
             print("Wrong!")
         }
         
     }
     
-    
+//MARK: - Method to start over and jump back to the first question.
     func startOver() {
         
         questionNumber = 0
@@ -93,3 +97,6 @@ class ViewController: UIViewController {
 
     
 }
+
+
+//Left off at lesson 326 in the middle of the video.
