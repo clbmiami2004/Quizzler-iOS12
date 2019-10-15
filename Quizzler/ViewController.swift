@@ -40,6 +40,8 @@ class ViewController: UIViewController {
         checkAnswer()
 //Here we are incrementing the number (question) everytime the user answers each one.
         questionNumber += 1
+//This line of code will update the question to the next question.
+        nextQuestion()
     }
     
     
@@ -49,13 +51,19 @@ class ViewController: UIViewController {
     
 
     func nextQuestion() {
-        
+        if questionNumber <= 12 {
+        questionLabel.text = allQuestions.list[questionNumber].questionText
+        }else {
+            print("End of Quiz!")
+            questionNumber = 0
+        }
+
     }
     
     
     func checkAnswer() {
 //Holding the answer from the first question.
-        let correctAnswer = allQuestions.list[0].answer
+        let correctAnswer = allQuestions.list[questionNumber].answer
 //Now we compare it to the pickedAnswer:
         if correctAnswer == pickedAnswer {
             print("You got it!")
